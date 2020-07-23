@@ -2,7 +2,10 @@
 on:
   push:
     branches:    
+      # Push events on master branch
       - master
+      # Push events on developer Branchmet
+      - development
 name: Build
 jobs:
   test:
