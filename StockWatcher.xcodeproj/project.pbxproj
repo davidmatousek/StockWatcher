@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		00ABFD0724C90E8D0061CA23 /* exportOptions.plist in Resources */ = {isa = PBXBuildFile; fileRef = 00ABFD0624C90E8D0061CA23 /* exportOptions.plist */; };
 		637315DF24C54C8F00D88F29 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637315DE24C54C8F00D88F29 /* AppDelegate.swift */; };
 		637315E124C54C8F00D88F29 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637315E024C54C8F00D88F29 /* SceneDelegate.swift */; };
 		637315E424C54C8F00D88F29 /* StockWatcher.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 637315E224C54C8F00D88F29 /* StockWatcher.xcdatamodeld */; };
@@ -36,6 +37,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		00ABFD0624C90E8D0061CA23 /* exportOptions.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = exportOptions.plist; sourceTree = "<group>"; };
 		637315DB24C54C8F00D88F29 /* StockWatcher.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StockWatcher.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		637315DE24C54C8F00D88F29 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		637315E024C54C8F00D88F29 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -107,6 +109,7 @@
 				637315E724C54C9300D88F29 /* Assets.xcassets */,
 				637315EC24C54C9300D88F29 /* LaunchScreen.storyboard */,
 				637315EF24C54C9300D88F29 /* Info.plist */,
+				00ABFD0624C90E8D0061CA23 /* exportOptions.plist */,
 				637315E224C54C8F00D88F29 /* StockWatcher.xcdatamodeld */,
 				637315E924C54C9300D88F29 /* Preview Content */,
 			);
@@ -246,6 +249,7 @@
 				637315EE24C54C9300D88F29 /* LaunchScreen.storyboard in Resources */,
 				637315EB24C54C9300D88F29 /* Preview Assets.xcassets in Resources */,
 				637315E824C54C9300D88F29 /* Assets.xcassets in Resources */,
+				00ABFD0724C90E8D0061CA23 /* exportOptions.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
