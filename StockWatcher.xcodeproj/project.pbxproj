@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		005A928224D133F800EAD474 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005A928124D133F800EAD474 /* HomeView.swift */; };
-		00A6F14724D12CD100740E61 /* Managers in Resources */ = {isa = PBXBuildFile; fileRef = 00A6F14624D12CD100740E61 /* Managers */; };
+		005A928624D1352500EAD474 /* IEX_API_Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005A928524D1352500EAD474 /* IEX_API_Manager.swift */; };
 		00ABFD0724C90E8D0061CA23 /* exportOptions.plist in Resources */ = {isa = PBXBuildFile; fileRef = 00ABFD0624C90E8D0061CA23 /* exportOptions.plist */; };
 		637315DF24C54C8F00D88F29 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637315DE24C54C8F00D88F29 /* AppDelegate.swift */; };
 		637315E124C54C8F00D88F29 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637315E024C54C8F00D88F29 /* SceneDelegate.swift */; };
@@ -40,7 +40,7 @@
 
 /* Begin PBXFileReference section */
 		005A928124D133F800EAD474 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
-		00A6F14624D12CD100740E61 /* Managers */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Managers; sourceTree = "<group>"; };
+		005A928524D1352500EAD474 /* IEX_API_Manager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IEX_API_Manager.swift; sourceTree = "<group>"; };
 		00ABFD0624C90E8D0061CA23 /* exportOptions.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = exportOptions.plist; sourceTree = "<group>"; };
 		637315DB24C54C8F00D88F29 /* StockWatcher.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StockWatcher.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		637315DE24C54C8F00D88F29 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -92,6 +92,15 @@
 			path = Home;
 			sourceTree = "<group>";
 		};
+		005A928724D1352C00EAD474 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				005A928524D1352500EAD474 /* IEX_API_Manager.swift */,
+			);
+			name = Managers;
+			path = ../Managers;
+			sourceTree = "<group>";
+		};
 		637315D224C54C8F00D88F29 = {
 			isa = PBXGroup;
 			children = (
@@ -115,8 +124,8 @@
 		637315DD24C54C8F00D88F29 /* StockWatcher */ = {
 			isa = PBXGroup;
 			children = (
-				00A6F14624D12CD100740E61 /* Managers */,
 				637315DE24C54C8F00D88F29 /* AppDelegate.swift */,
+				005A928724D1352C00EAD474 /* Managers */,
 				005A928324D1340200EAD474 /* Home */,
 				637315E024C54C8F00D88F29 /* SceneDelegate.swift */,
 				637315E524C54C8F00D88F29 /* ContentView.swift */,
@@ -261,7 +270,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				637315EE24C54C9300D88F29 /* LaunchScreen.storyboard in Resources */,
-				00A6F14724D12CD100740E61 /* Managers in Resources */,
 				637315EB24C54C9300D88F29 /* Preview Assets.xcassets in Resources */,
 				637315E824C54C9300D88F29 /* Assets.xcassets in Resources */,
 				00ABFD0724C90E8D0061CA23 /* exportOptions.plist in Resources */,
@@ -290,6 +298,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				637315DF24C54C8F00D88F29 /* AppDelegate.swift in Sources */,
+				005A928624D1352500EAD474 /* IEX_API_Manager.swift in Sources */,
 				637315E424C54C8F00D88F29 /* StockWatcher.xcdatamodeld in Sources */,
 				637315E624C54C8F00D88F29 /* ContentView.swift in Sources */,
 				005A928224D133F800EAD474 /* HomeView.swift in Sources */,
