@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IEXProductionToken</key>
+	<string>pk_7c11cd5930244a8984ec15ba59528b02</string>
+	<key>IEXSandboxToken</key>
+	<string>Tsk_8d37353c75bd4380939cbeab573a727b</string>
+</dict>
+</plist>
