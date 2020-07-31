@@ -8,6 +8,7 @@
 
 import SwiftUI
 
+
 struct HomeView: View {
     @State private var results = StockResponse(symbol: "", companyName:"", primaryExchange:"",calculationPrice:"",latestPrice:0,previousClose:0)
 
@@ -23,13 +24,20 @@ struct HomeView: View {
     
     func loadData() {
  /*
-        //https://sandbox.iexapis.com/stable/stock/AAPL/quote?token=Tsk_8d37353c75bd4380939cbeab573a727b
-        //https://cloud.iexapis.com/stable/stock/AAPL/quote?token=pk_7c11cd5930244a8984ec15ba59528b02
+        //https://sandbox.iexapis.com/stable/stock/AAPL/quote?token=
+        //https://cloud.iexapis.com/stable/stock/AAPL/quote?token=
     
      */
+        let delegate = UIApplication.shared.delegate as! AppDelegate
+
+        let token = delegate.IEXSandboxToken
+        let host = "https://sandbox.iexapis.com"
+        let basePath = "/stable/stock/AAPL/quote"
         
-                let Url = String(format: "https://sandbox.iexapis.com/stable/stock/AAPL/quote?token=Tsk_8d37353c75bd4380939cbeab573a727b")
-                guard let serviceUrl = URL(string: Url) else { return }
+                //let Url = String(format: "https://sandbox.iexapis.com/stable/stock/AAPL/quote?token=")
+        let Url = host + basePath + "?token=" + token
+        
+        guard let serviceUrl = URL(string: Url) else { return }
         rest.makeRequest(toURL: serviceUrl, withHttpMethod: .get) { (results) in
               if let data = results.data {
                   let decoder = JSONDecoder()

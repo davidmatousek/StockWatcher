@@ -12,10 +12,22 @@ import CoreData
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
+    var IEXProductionToken = String()
+    var IEXSandboxToken = String()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        var keys: NSDictionary?
+        if let path = Bundle.main.path(forResource: "Keys", ofType: "plist") {
+               keys = NSDictionary(contentsOfFile: path)
+           }
+        if let dict = keys {
+            self.IEXProductionToken = (dict["IEXProductionToken"] as? String)!
+            self.IEXSandboxToken = (dict["IEXSandboxToken"] as? String)!
+
+            // Initialize Parse.
+            //Parse.setApplicationId(applicationId!, clientKey: clientKey!)
+        }
         return true
     }
 
