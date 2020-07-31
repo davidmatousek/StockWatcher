@@ -42,10 +42,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		002D473F24D27D5300D51488 /* RestManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RestManager.swift; path = ../StockWatcher/Managers/RestManager.swift; sourceTree = "<group>"; };
-		002D474124D27ED800D51488 /* DataStructures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DataStructures.swift; path = ../StockWatcher/Managers/DataStructures.swift; sourceTree = "<group>"; };
+		002D473F24D27D5300D51488 /* RestManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestManager.swift; sourceTree = "<group>"; };
+		002D474124D27ED800D51488 /* DataStructures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStructures.swift; sourceTree = "<group>"; };
 		005A928124D133F800EAD474 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
-		005A928524D1352500EAD474 /* IEX_API_Manager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = IEX_API_Manager.swift; path = ../StockWatcher/Managers/IEX_API_Manager.swift; sourceTree = "<group>"; };
+		005A928524D1352500EAD474 /* IEX_API_Manager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IEX_API_Manager.swift; sourceTree = "<group>"; };
 		005A928824D13D7800EAD474 /* APIResponses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIResponses.swift; sourceTree = "<group>"; };
 		00ABFD0624C90E8D0061CA23 /* exportOptions.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = exportOptions.plist; sourceTree = "<group>"; };
 		637315DB24C54C8F00D88F29 /* StockWatcher.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StockWatcher.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -105,8 +105,7 @@
 				002D473F24D27D5300D51488 /* RestManager.swift */,
 				002D474124D27ED800D51488 /* DataStructures.swift */,
 			);
-			name = Managers;
-			path = ../Managers;
+			path = Managers;
 			sourceTree = "<group>";
 		};
 		005A928A24D13D7D00EAD474 /* Models */ = {
