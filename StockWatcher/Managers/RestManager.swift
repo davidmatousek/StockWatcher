@@ -1,5 +1,4 @@
 //
-//  RestManager.swift
 //  StockWatcher
 //
 //  Created by Matousek, David on 7/30/20.

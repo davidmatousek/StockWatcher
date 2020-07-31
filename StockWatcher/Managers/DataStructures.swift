@@ -7,13 +7,15 @@
 //
 
 import Foundation
-struct SingleStockData: Codable {
-    var data: Stock?
-}
 
 
-struct Stock: Codable {
+struct StockResponse: Codable {
     var symbol: String
     var companyName:String
+    var primaryExchange:String
+    var calculationPrice:String
+
     var latestPrice:Double
-    }
+    var previousClose:Double
+}
+
