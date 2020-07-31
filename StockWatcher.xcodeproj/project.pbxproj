@@ -12,6 +12,7 @@
 		005A928624D1352500EAD474 /* IEX_API_Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005A928524D1352500EAD474 /* IEX_API_Manager.swift */; };
 		005A928924D13D7800EAD474 /* APIResponses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005A928824D13D7800EAD474 /* APIResponses.swift */; };
 		005C87E724D3D13700A827C3 /* DataStructures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002D474124D27ED800D51488 /* DataStructures.swift */; };
+		005C87E924D46C8A00A827C3 /* Keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 005C87E824D46C8A00A827C3 /* Keys.plist */; };
 		00ABFD0724C90E8D0061CA23 /* exportOptions.plist in Resources */ = {isa = PBXBuildFile; fileRef = 00ABFD0624C90E8D0061CA23 /* exportOptions.plist */; };
 		637315DF24C54C8F00D88F29 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637315DE24C54C8F00D88F29 /* AppDelegate.swift */; };
 		637315E124C54C8F00D88F29 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637315E024C54C8F00D88F29 /* SceneDelegate.swift */; };
@@ -47,6 +48,7 @@
 		005A928124D133F800EAD474 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		005A928524D1352500EAD474 /* IEX_API_Manager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IEX_API_Manager.swift; sourceTree = "<group>"; };
 		005A928824D13D7800EAD474 /* APIResponses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIResponses.swift; sourceTree = "<group>"; };
+		005C87E824D46C8A00A827C3 /* Keys.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Keys.plist; sourceTree = "<group>"; };
 		00ABFD0624C90E8D0061CA23 /* exportOptions.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = exportOptions.plist; sourceTree = "<group>"; };
 		637315DB24C54C8F00D88F29 /* StockWatcher.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StockWatcher.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		637315DE24C54C8F00D88F29 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -116,6 +118,15 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		005C87EA24D46D2900A827C3 /* Property Files */ = {
+			isa = PBXGroup;
+			children = (
+				637315EF24C54C9300D88F29 /* Info.plist */,
+				005C87E824D46C8A00A827C3 /* Keys.plist */,
+			);
+			path = "Property Files";
+			sourceTree = "<group>";
+		};
 		637315D224C54C8F00D88F29 = {
 			isa = PBXGroup;
 			children = (
@@ -139,6 +150,7 @@
 		637315DD24C54C8F00D88F29 /* StockWatcher */ = {
 			isa = PBXGroup;
 			children = (
+				005C87EA24D46D2900A827C3 /* Property Files */,
 				005A928324D1340200EAD474 /* Home */,
 				005A928724D1352C00EAD474 /* Managers */,
 				005A928A24D13D7D00EAD474 /* Models */,
@@ -147,7 +159,6 @@
 				637315E524C54C8F00D88F29 /* ContentView.swift */,
 				637315E724C54C9300D88F29 /* Assets.xcassets */,
 				637315EC24C54C9300D88F29 /* LaunchScreen.storyboard */,
-				637315EF24C54C9300D88F29 /* Info.plist */,
 				00ABFD0624C90E8D0061CA23 /* exportOptions.plist */,
 				637315E224C54C8F00D88F29 /* StockWatcher.xcdatamodeld */,
 				637315E924C54C9300D88F29 /* Preview Content */,
@@ -289,6 +300,7 @@
 				637315EB24C54C9300D88F29 /* Preview Assets.xcassets in Resources */,
 				637315E824C54C9300D88F29 /* Assets.xcassets in Resources */,
 				00ABFD0724C90E8D0061CA23 /* exportOptions.plist in Resources */,
+				005C87E924D46C8A00A827C3 /* Keys.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -492,7 +504,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"StockWatcher/Preview Content\"";
 				DEVELOPMENT_TEAM = 9A3VS9ZD94;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = StockWatcher/Info.plist;
+				INFOPLIST_FILE = "StockWatcher/Property Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -512,7 +524,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"StockWatcher/Preview Content\"";
 				DEVELOPMENT_TEAM = 9A3VS9ZD94;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = StockWatcher/Info.plist;
+				INFOPLIST_FILE = "StockWatcher/Property Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
