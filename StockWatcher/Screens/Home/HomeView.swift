@@ -20,12 +20,13 @@ struct HomeView: View {
     var body: some View {
         NavigationView {
             List {
-                ForEach(HomeView.stockList, id:\.self) {item in
-                    HomeViewRow(item:item)
+                ForEach(HomeView.stockList, id:\.self) {stockSymbol in
+                    HomeViewRow(item:stockSymbol)
                 }
             }.navigationTitle("Menu").listStyle((GroupedListStyle()))
         }
     }
+    /*
     func loadData() {
      /*
             //https://sandbox.iexapis.com/stable/stock/AAPL/quote?token=
@@ -58,8 +59,9 @@ struct HomeView: View {
                   }
                  */
               }
-        }
+        }*/
 }
+     
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
