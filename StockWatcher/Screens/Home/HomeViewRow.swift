@@ -14,6 +14,42 @@ struct HomeViewRow: View {
     var body: some View {
         Text(item)
     }
+    
+    
+    /*
+    func loadData() {
+     /*
+            //https://sandbox.iexapis.com/stable/stock/AAPL/quote?token=
+            //https://cloud.iexapis.com/stable/stock/AAPL/quote?token=
+        
+         */
+            let delegate = UIApplication.shared.delegate as! AppDelegate
+
+            let token = delegate.IEXSandboxToken
+            let host = "https://sandbox.iexapis.com"
+            let basePath = "/stable/stock/AAPL/quote"
+            
+                    //let Url = String(format: "https://sandbox.iexapis.com/stable/stock/AAPL/quote?token=")
+            let Url = host + basePath + "?token=" + token
+            
+            guard let serviceUrl = URL(string: Url) else { return }
+            rest.makeRequest(toURL: serviceUrl, withHttpMethod: .get) { (results) in
+                  if let data = results.data {
+                      let decoder = JSONDecoder()
+                      decoder.keyDecodingStrategy = .convertFromSnakeCase
+                      guard let userData = try? decoder.decode(StockResponse.self, from: data) else { return }
+                    self.results = userData
+                  }
+                  
+                /*
+                  if let response = results.response {
+                      for (key, value) in response.headers.allValues() {
+                          print(key, value)
+                      }
+                  }
+                 */
+              }
+        }*/
 }
 
 struct HomeViewRow_Previews: PreviewProvider {
@@ -22,3 +58,5 @@ struct HomeViewRow_Previews: PreviewProvider {
         HomeViewRow(item:"AAPL")
     }
 }
+
+
