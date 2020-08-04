@@ -10,12 +10,12 @@ import Foundation
 import SwiftUI
 
 final class IEX_API_Manager {
-    static let shared = IEX_API_Manager()
-    let rest = RestManager()
-    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+    //static let shared = IEX_API_Manager()
+    //let rest = RestManager()
+    //let appDelegate = UIApplication.shared.delegate as! AppDelegate
     //var results = StockResponse(symbol: "", companyName:"", primaryExchange:"",calculationPrice:"",latestPrice:0,previousClose:0)
     
-    
+    /*
     public func getStock() -> StockResponse{
         let results = getStock(symbol:"AAPL")
         return results
@@ -58,7 +58,7 @@ final class IEX_API_Manager {
           }
         return results
     }
-
+*/
 }
     
 
