@@ -15,6 +15,8 @@
 		005C87E724D3D13700A827C3 /* DataStructures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002D474124D27ED800D51488 /* DataStructures.swift */; };
 		005C87E924D46C8A00A827C3 /* Keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 005C87E824D46C8A00A827C3 /* Keys.plist */; };
 		00ABFD0724C90E8D0061CA23 /* exportOptions.plist in Resources */ = {isa = PBXBuildFile; fileRef = 00ABFD0624C90E8D0061CA23 /* exportOptions.plist */; };
+		00F4A90324DC4E55000EA651 /* StockWatcherList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F4A90224DC4E55000EA651 /* StockWatcherList.swift */; };
+		00F4A90524DC5978000EA651 /* StockResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F4A90424DC5978000EA651 /* StockResponse.swift */; };
 		637315DF24C54C8F00D88F29 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637315DE24C54C8F00D88F29 /* AppDelegate.swift */; };
 		637315E124C54C8F00D88F29 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637315E024C54C8F00D88F29 /* SceneDelegate.swift */; };
 		637315E424C54C8F00D88F29 /* StockWatcher.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 637315E224C54C8F00D88F29 /* StockWatcher.xcdatamodeld */; };
@@ -51,6 +53,8 @@
 		005A928824D13D7800EAD474 /* APIResponses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIResponses.swift; sourceTree = "<group>"; };
 		005C87E824D46C8A00A827C3 /* Keys.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Keys.plist; sourceTree = "<group>"; };
 		00ABFD0624C90E8D0061CA23 /* exportOptions.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = exportOptions.plist; sourceTree = "<group>"; };
+		00F4A90224DC4E55000EA651 /* StockWatcherList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockWatcherList.swift; sourceTree = "<group>"; };
+		00F4A90424DC5978000EA651 /* StockResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockResponse.swift; sourceTree = "<group>"; };
 		637315DB24C54C8F00D88F29 /* StockWatcher.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StockWatcher.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		637315DE24C54C8F00D88F29 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		637315E024C54C8F00D88F29 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -115,6 +119,7 @@
 				005A928524D1352500EAD474 /* IEX_API_Manager.swift */,
 				002D473F24D27D5300D51488 /* RestManager.swift */,
 				002D474124D27ED800D51488 /* DataStructures.swift */,
+				00F4A90224DC4E55000EA651 /* StockWatcherList.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -123,6 +128,7 @@
 			isa = PBXGroup;
 			children = (
 				005A928824D13D7800EAD474 /* APIResponses.swift */,
+				00F4A90424DC5978000EA651 /* StockResponse.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -335,6 +341,7 @@
 			files = (
 				005C87E724D3D13700A827C3 /* DataStructures.swift in Sources */,
 				00085A6924D913E5004F6BFF /* HomeViewRow.swift in Sources */,
+				00F4A90524DC5978000EA651 /* StockResponse.swift in Sources */,
 				637315DF24C54C8F00D88F29 /* AppDelegate.swift in Sources */,
 				005A928624D1352500EAD474 /* IEX_API_Manager.swift in Sources */,
 				637315E424C54C8F00D88F29 /* StockWatcher.xcdatamodeld in Sources */,
@@ -342,6 +349,7 @@
 				002D474024D27D5300D51488 /* RestManager.swift in Sources */,
 				005A928924D13D7800EAD474 /* APIResponses.swift in Sources */,
 				637315E124C54C8F00D88F29 /* SceneDelegate.swift in Sources */,
+				00F4A90324DC4E55000EA651 /* StockWatcherList.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -9,18 +9,5 @@
 import Foundation
 
 
-struct StockResponse: Codable, Equatable, Identifiable  {
-    var id = UUID()
-    var symbol: String
-    var companyName:String
-    var primaryExchange:String
-    var calculationPrice:String
 
-    var latestPrice:Double
-    var previousClose:Double
-    
-    #if DEBUG
-    static let example = StockResponse(id: UUID(), symbol: "aapl", companyName:"apple", primaryExchange:"",calculationPrice:"3",latestPrice:400,previousClose:390)
-    #endif
-}
 

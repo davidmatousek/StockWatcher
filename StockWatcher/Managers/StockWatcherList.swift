@@ -1,28 +1,35 @@
 //
-//  HomeViewRow.swift
+//  StockWatcherList.swift
 //  StockWatcher
 //
-//  Created by Matousek, David on 8/3/20.
+//  Created by Matousek, David on 8/6/20.
 //  Copyright © 2020 David Matousek. All rights reserved.
 //
 
 import SwiftUI
 
-struct HomeViewRow: View {
-    var item: String
-    
-    var body: some View {
-        VStack{
-            Text(results.companyName)
-            Text(results.symbol)
-        }.onAppear {loadData()}
+class StockWatcherList: ObservableObject  {
+    @Published var items = [StockResponse]()
+
+
+
+    func add(item: StockResponse) {
+        items.append(item)
+    }
+
+    func remove(item: StockResponse) {
+        if let index = items.firstIndex(of: item) {
+            items.remove(at: index)
+        }
+    }
+    func addSymbol(stockSymbol: String) {
+        //need to call API and add Response to watchlist
+
     }
     
-
     let rest = RestManager()
-    @State private var results : StockResponse = StockResponse.example
     
-    func loadData() {
+    private func loadData(stockSymbol: String){
      /*
             //https://sandbox.iexapis.com/stable/stock/AAPL/quote?token=
             //https://cloud.iexapis.com/stable/stock/AAPL/quote?token=
@@ -32,18 +39,18 @@ struct HomeViewRow: View {
 
             let token = delegate.IEXSandboxToken
             let host = "https://sandbox.iexapis.com"
-            let basePath = "/stable/stock/" + item + "/quote"
+            let basePath = "/stable/stock/" + stockSymbol + "/quote"
             
                     //let Url = String(format: "https://sandbox.iexapis.com/stable/stock/AAPL/quote?token=")
             let Url = host + basePath + "?token=" + token
             
-            guard let serviceUrl = URL(string: Url) else { return }
+        guard let serviceUrl = URL(string: Url) else { return }
             rest.makeRequest(toURL: serviceUrl, withHttpMethod: .get) { (results) in
                   if let data = results.data {
                       let decoder = JSONDecoder()
                       decoder.keyDecodingStrategy = .convertFromSnakeCase
                       guard let userData = try? decoder.decode(StockResponse.self, from: data) else { return }
-                    self.results = userData
+                    self.items.append(userData)
                   }
                   
                 /*
@@ -55,13 +62,5 @@ struct HomeViewRow: View {
                  */
               }
         }
+    
 }
-
-struct HomeViewRow_Previews: PreviewProvider {
-    static var previews: some View {
-        //HomeViewRow(item:StockResponse.example)
-        HomeViewRow(item:"AAPL")
-    }
-}
-
-
