@@ -12,20 +12,20 @@ import SwiftUI
 struct HomeView: View {
     static let stockList = ["AAPL","MSFT","GOOGL","NFLX","AMZN"]
     
-    @State private var results = StockResponse(symbol: "aapl", companyName:"apple", primaryExchange:"",calculationPrice:"3",latestPrice:400,previousClose:390)
+    //@State private var results = StockResponse(symbol: "aapl", companyName:"apple", primaryExchange:"",calculationPrice:"3",latestPrice:400,previousClose:390)
     //let results = IEX_API_Manager.shared.getStock()
     
     let rest = RestManager()
     
     var body: some View {
-        /*NavigationView {
+        NavigationView {
             List {
                 ForEach(HomeView.stockList, id:\.self) {stockSymbol in
                     HomeViewRow(item:stockSymbol)
                 } 
             }.navigationTitle("Menu").listStyle((GroupedListStyle()))
-        }*/
-        Text("hello")
+        }
+        //Text("hello")
     }
 
 }
