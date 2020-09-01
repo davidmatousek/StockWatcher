@@ -31,7 +31,7 @@ struct HomeView: View {
     //I need a way to refresh teh datastore
     
     var body: some View {
-        NavigationView {
+        /*NavigationView {
             List {
                 ForEach(self.stockList, id:\.self) {stockSymbol in
                     HomeViewRow(item:stockSymbol)
@@ -40,8 +40,8 @@ struct HomeView: View {
             }
             .navigationTitle("My Stocks")
             .listStyle((GroupedListStyle()))
-        }
-        //Text("hello")
+        }*/
+        Text("hello")
     }
 
 }
