@@ -13,13 +13,14 @@ struct HomeViewRow: View {
     
     var body: some View {
         VStack{
-            Text(results.companyName)
-            Text(results.symbol)
-        }.onAppear {loadData()}
+            Text(item)
+            Text(item)
+        }
     }
     
-
+/*
     let rest = RestManager()
+    
     @State private var results : StockResponse = StockResponse.example
     
     func loadData() {
@@ -54,7 +55,7 @@ struct HomeViewRow: View {
                   }
                  */
               }
-        }
+        }*/
 }
 
 struct HomeViewRow_Previews: PreviewProvider {
