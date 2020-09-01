@@ -19,6 +19,6 @@ jobs:
         uses: actions/checkout@master
       - name: Build
         run: |
-          xcodebuild clean test -project TodoSampleApp.xcodeproj -scheme StockWatcher -destination "platform=iOS Simulator,name=iPhone 11"
+          xcodebuild clean test -project StockWatcher.xcodeproj -scheme StockWatcher -destination "platform=iOS Simulator,name=iPhone 11"
         env: 
          destination: ${{ matrix.destination }}
