@@ -9,12 +9,17 @@
 import SwiftUI
 
 struct HomeViewRow: View {
-    var item: String
+    var item: stock
     
     var body: some View {
         VStack{
-            Text(item)
-            Text(item)
+            Text(item.companyName)
+            Text(item.symbol)
+        }
+        Spacer()
+        VStack{
+            //Text(String(item.latestPrice))
+           Text("$\(item.latestPrice, specifier: "%.2f")")
         }
     }
     
@@ -61,7 +66,7 @@ struct HomeViewRow: View {
 struct HomeViewRow_Previews: PreviewProvider {
     static var previews: some View {
         //HomeViewRow(item:StockResponse.example)
-        HomeViewRow(item:"AAPL")
+        HomeViewRow(item:stock.default)
     }
 }
 

@@ -10,6 +10,53 @@ import Combine
 import SwiftUI
 
 
+struct stock: Codable  {
+    let symbol: String
+    let companyName: String
+    let primaryExchange: String
+    let calculationPrice: String
+//    let welcomeOpen, openTime: NSNull
+//    let openSource: String
+//    let close, closeTime: NSNull
+//    let closeSource: String
+//    let high: NSNull
+//    let highTime: Int
+//    let highSource: String
+//    let low: NSNull
+//    let lowTime: Int
+//    let lowSource: String
+    let latestPrice: Double
+//    let latestSource, latestTime: String
+//    let latestUpdate: Int
+//    let latestVolume: NSNull
+//    let iexRealtimePrice: Double
+//    let iexRealtimeSize, iexLastUpdated: Int
+//    let delayedPrice, delayedPriceTime, oddLotDelayedPrice, oddLotDelayedPriceTime: NSNull
+//    let extendedPrice, extendedChange, extendedChangePercent, extendedPriceTime: NSNull
+//    let previousClose, previousVolume: Int
+//    let change, changePercent: Double
+//    let volume: NSNull
+//    let iexMarketPercent: Double
+//    let iexVolume, avgTotalVolume: Int
+//    let iexBidPrice: Double
+//    let iexBidSize, iexAskPrice, iexAskSize: Int
+//    let iexOpen, iexOpenTime: NSNull
+//    let iexClose: Double
+//    let iexCloseTime, marketCap: Int
+//    let peRatio, week52High, week52Low, ytdChange: Double
+//    let lastTradeTime: Int
+//    let isUSMarketOpen: Bool
+    #if DEBUG
+    static let `default` = stock(symbol: "error",
+                                 companyName:"error",
+                                 primaryExchange:"",
+                                 calculationPrice:"",
+                                 latestPrice:0
+    )
+    #endif
+}
+
+
 struct Message: Decodable, Identifiable {
     let id: Int
     let from: String
@@ -19,6 +66,8 @@ struct Message: Decodable, Identifiable {
 struct HomeView: View {
     @State private var requests = Set<AnyCancellable>()
     @State private var messages = [Message]()
+    @State private var stocks = [stock]()
+    @State private var stockResult = stock.default
     @State private var favorites = Set<Int>()
     let stockList = ["AAPL","MSFT","GOOGL","NFLX","AMZN"]
     
@@ -46,73 +95,110 @@ struct HomeView: View {
 
         //Commented out because NavigationView Not supported in version
         NavigationView {
-            List {
-                ForEach(self.stockList, id:\.self) {stockSymbol in
-                    HomeViewRow(item:stockSymbol)
-
-                }
+            List(stocks, id: \.symbol) {stockSymbol in
+               HomeViewRow(item:stockSymbol)
+               // Text(stockSymbol.companyName)
             }
             .navigationTitle("My Stocks")
             .listStyle((GroupedListStyle()))
-        }
-//        NavigationView {
-//            List(messages) { message in
-//                HStack {
-//                    VStack(alignment: .leading) {
-//                        Text(message.from)
-//                            .font(.headline)
+//            VStack{
+//                Text(self.stockResult.symbol)
+//                Text(self.stockResult.companyName)
+//                Text(self.stockResult.primaryExchange)
+//                Text(self.stockResult.calculationPrice)
 //
-//                        Text(message.message)
-//                            .foregroundColor(.secondary)
-//                    }
-//
-//                    if favorites.contains(message.id) {
-//                        Spacer()
-//
-//                        Image(systemName: "heart.fill")
-//                            .foregroundColor(.red)
-//                    }
-//                }
 //            }
-//            .navigationTitle("Messages")
-//        }
-        .onAppear {/*
-            let messagesURL = URL(string: "http://www.hackingwithswift.com/samples/user-messages.json")!
-            let messagesTask = fetch(messagesURL, defaultValue: [Message]())
-
-            let favoritesURL = URL(string: "http://www.hackingwithswift.com/samples/user-favorites.json")!
-            let favoritesTask = fetch(favoritesURL, defaultValue: Set<Int>())
-
-            let combined = Publishers.Zip(messagesTask, favoritesTask)
-
-            combined.sink { loadedMessages, loadedFavorites in
-                messages = loadedMessages
-                favorites = loadedFavorites
-             }
-             .store(in: &requests)
-             */
-            let delegate = UIApplication.shared.delegate as! AppDelegate
-            let token = delegate.IEXSandboxToken
-            /*
-            let host = "https://sandbox.iexapis.com"
-            let basePath = "/stable/stock/" + stockSymbol + "/quote"
-            let Url = host + basePath + "?token=" + token
-            */
-            let urlString : String = "https://sandbox.iexapis.com/stable/stock/AAPL/quote?token=" + token
-            let url = URL(string: urlString)!
-            self.fetch(url, defaultValue: StockResponse.default) {
-                print($0.companyName)
-            }
+            
         }
-}
 
+            .onAppear {
+                /*
+                let host = "https://sandbox.iexapis.com"
+                let basePath = "/stable/stock/" + stockSymbol + "/quote"
+                let Url = host + basePath + "?token=" + token
+                */
+                
+                let delegate = UIApplication.shared.delegate as! AppDelegate
+                let token = delegate.IEXSandboxToken
+                //let urlString : String = "https://sandbox.iexapis.com/stable/stock/AAPL/quote?token=" + token
+               /*
+                guard let serviceUrl = URL(string: urlString) else { return }
+                rest.makeRequest(toURL: serviceUrl, withHttpMethod: .get) { (results) in
+                   if let data = results.data {
+                       let decoder = JSONDecoder()
+                       decoder.keyDecodingStrategy = .convertFromSnakeCase
+                       guard let userData = try? decoder.decode(stock.self, from: data) else { return }
+                    print(userData)
+                    self.stocks.append(userData)
+                   }
+                }
+                  */
+
+                
+//                self.fetch(url)
+
+                for item in stockList {
+                    let host = "https://sandbox.iexapis.com"
+                    let basePath = "/stable/stock/" + item + "/quote"
+                    let urlString = host + basePath + "?token=" + token
+                    //let urlString : String = "https://sandbox.iexapis.com/stable/stock/AAPL/quote?token=" + token
+                    let url = URL(string: urlString)!
+                    
+                    self.fetch(url, defaultValue: stock.default) {
+                        print($0.companyName)
+                        //print($0.latestPrice)
+                        stocks.append($0)
+                    }
+                }
+//                self.fetch(url, defaultValue: stock.default) {
+//                    print($0.companyName)
+//                    //print($0.latestPrice)
+//                    stocks.append($0)
+//                    stockResult = $0
+//                }
+            }
+    }
+    
+    func fetch(_ url: URL) {
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            if let error = error {
+                print(stock.default.companyName)
+            } else if let data = data {
+                let decoder = JSONDecoder()
+
+                do {
+                    let stockInfo = try decoder.decode(stock.self, from: data)
+                    stockResult = stockInfo
+                    print(stockInfo.companyName)
+                } catch {
+                    print(stock.default.companyName)
+                }
+            }
+        }.resume()
+    }
+    
+    enum HTTPError: LocalizedError {
+        case statusCode
+    }
     
     func fetch<T: Decodable>(_ url: URL, defaultValue: T, completion: @escaping (T) -> Void) {
         let decoder = JSONDecoder()
-
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
+        
         URLSession.shared.dataTaskPublisher(for: url)
             .retry(1)
             .map(\.data)
+//            .tryMap { output in
+//                guard let response = output.response as? HTTPURLResponse, response.statusCode == 200 else {
+//                    throw HTTPError.statusCode
+//                }
+//                print("annoyed")
+//                print(output.self)
+//                print(output.data)
+//                print(output.response)
+//                print("still annoyed")
+//                return output.data
+//            }
             .decode(type: T.self, decoder: decoder)
             .replaceError(with: defaultValue)
             .receive(on: DispatchQueue.main)
