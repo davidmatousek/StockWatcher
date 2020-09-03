@@ -43,6 +43,8 @@ struct HomeView: View {
     //I need a way to refresh teh datastore
     
     var body: some View {
+        /*
+        //Commented out because NavigationView Not supported in version
         NavigationView {
             List {
                 ForEach(self.stockList, id:\.self) {stockSymbol in

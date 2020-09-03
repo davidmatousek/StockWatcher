@@ -11,6 +11,7 @@ jobs:
   test:
     name: Build
     runs-on: macOS-latest
+    
     strategy:
          matrix:
            destination: ['platform=iOS Simulator,name=iPhone 11']
@@ -19,6 +20,7 @@ jobs:
         uses: actions/checkout@master
       - name: Build
         run: |
-          xcodebuild clean build -project StockWatcher.xcodeproj -scheme StockWatcher -destination "${destination}" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO
+          sudo xcode-select -s /Applications/Xcode_12.app/Contents/Developer
+          xcodebuild clean build -workspace StockWatcher.xcworkspace -scheme StockWatcher -destination "${destination}" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO
         env: 
          destination: ${{ matrix.destination }}
