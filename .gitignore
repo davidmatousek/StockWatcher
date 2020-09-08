@@ -92,4 +92,4 @@ iOSInjectionProject/
 # Property File
 #
 # Keep Keys.plist private
-Property Files/Keys.plist
+StockWatcher/Property Files/Keys.plist
