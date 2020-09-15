@@ -8,15 +8,17 @@
 
 import Foundation
 
-struct StockResponse: Codable, Equatable, Identifiable  {
-    var id = UUID()
+struct Stock: Codable {
+    //var id = UUID()
     let symbol: String
     let companyName: String
     let primaryExchange: String
-//    let calculationPrice: String
-//    let welcomeOpen, openTime: NSNull
-//    let openSource: String
-//    let close, closeTime: NSNull
+    let calculationPrice: String
+    let welcomeOpen: Date?
+    let openTime: Date?
+    let openSource: String
+    let close: Double?
+    let closeTime: Date?
 //    let closeSource: String
 //    let high: NSNull
 //    let highTime: Int
@@ -24,7 +26,7 @@ struct StockResponse: Codable, Equatable, Identifiable  {
 //    let low: NSNull
 //    let lowTime: Int
 //    let lowSource: String
-//    let latestPrice: Double
+    let latestPrice: Double
 //    let latestSource, latestTime: String
 //    let latestUpdate: Int
 //    let latestVolume: NSNull
@@ -33,7 +35,8 @@ struct StockResponse: Codable, Equatable, Identifiable  {
 //    let delayedPrice, delayedPriceTime, oddLotDelayedPrice, oddLotDelayedPriceTime: NSNull
 //    let extendedPrice, extendedChange, extendedChangePercent, extendedPriceTime: NSNull
 //    let previousClose, previousVolume: Int
-//    let change, changePercent: Double
+      let change: Double
+      let changePercent: Double
 //    let volume: NSNull
 //    let iexMarketPercent: Double
 //    let iexVolume, avgTotalVolume: Int
@@ -54,7 +57,20 @@ struct StockResponse: Codable, Equatable, Identifiable  {
     #if DEBUG
     //static let example = StockResponse(id: UUID(), symbol: "aapl", companyName:"apple", primaryExchange:"",calculationPrice:"3",latestPrice:400,previousClose:390)
     //static let `default` = StockResponse(id: UUID(), symbol: "aapl", companyName:"apple", primaryExchange:"",calculationPrice:"3",latestPrice:400,previousClose:390)
-    static let `default` = StockResponse(id: UUID(), symbol: "error", companyName:"error", primaryExchange:"")
+    static let `default` = Stock(//id: UUID(),
+                                symbol: "error",
+                                companyName: "error",
+                                primaryExchange: "",
+                                calculationPrice: "",
+                                welcomeOpen: nil,
+                                openTime: nil,
+                                openSource: "",
+                                close: nil,
+                                closeTime: nil,
+                                latestPrice: 0.0,
+                                change: 0.0,
+                                changePercent: 0.0
+                                )
     #endif
 }
 

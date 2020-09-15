@@ -3,8 +3,8 @@
 <plist version="1.0">
 <dict>
 	<key>IEXProductionToken</key>
-	<string>##INSERT YOU PRODUCTION TOKEN HERE!##</string>
+	<string>pk_7c11cd5930244a8984ec15ba59528b02</string>
 	<key>IEXSandboxToken</key>
-	<string>##INSERT YOU SANDBOX TOKEN HERE!##</string>
+	<string>Tsk_8d37353c75bd4380939cbeab573a727b</string>
 </dict>
 </plist>

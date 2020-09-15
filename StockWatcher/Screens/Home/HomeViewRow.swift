@@ -9,18 +9,36 @@
 import SwiftUI
 
 struct HomeViewRow: View {
-    var item: stock
+    var item: Stock
+    @State private var isRed: Bool = false
+    @State private var isGreen: Bool = false
+    
     
     var body: some View {
-        VStack{
-            Text(item.companyName)
+        VStack(alignment: .leading) {
             Text(item.symbol)
+            Spacer()
+            Text(item.companyName)
+                .font(.caption)
         }
+        
         Spacer()
-        VStack{
+        VStack(alignment: .trailing){
             //Text(String(item.latestPrice))
            Text("$\(item.latestPrice, specifier: "%.2f")")
-        }
+           Text("$\(item.change, specifier: "%.2f") (\(item.changePercent*100, specifier: "%.2f")%)")
+            .foregroundColor(self.isRed ? .red : self.isGreen ? .green : .black)
+        }.onAppear (
+            perform: {
+                if item.change > 0.0 {
+                    self.isGreen = true
+                }
+                if item.change < 0.0  {
+                    self.isRed = true
+                }
+            }
+        )
+
     }
     
 /*
@@ -66,7 +84,7 @@ struct HomeViewRow: View {
 struct HomeViewRow_Previews: PreviewProvider {
     static var previews: some View {
         //HomeViewRow(item:StockResponse.example)
-        HomeViewRow(item:stock.default)
+        HomeViewRow(item:Stock.default)
     }
 }
 
