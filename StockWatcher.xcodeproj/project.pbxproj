@@ -8,10 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		00085A6924D913E5004F6BFF /* HomeViewRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00085A6824D913E5004F6BFF /* HomeViewRow.swift */; };
-		002D474024D27D5300D51488 /* RestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002D473F24D27D5300D51488 /* RestManager.swift */; };
+		0025069625139243009CCB1B /* RESTManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0025069525139243009CCB1B /* RESTManager.swift */; };
+		0025069825139459009CCB1B /* WatchList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0025069725139459009CCB1B /* WatchList.swift */; };
+		0025069A25139B78009CCB1B /* StockList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0025069925139B78009CCB1B /* StockList.swift */; };
 		0030FB412510FA8D000715D9 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0030FB402510FA8D000715D9 /* DetailView.swift */; };
 		005A928224D133F800EAD474 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005A928124D133F800EAD474 /* HomeView.swift */; };
-		005C87E724D3D13700A827C3 /* DataStructures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002D474124D27ED800D51488 /* DataStructures.swift */; };
 		005C87E924D46C8A00A827C3 /* Keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 005C87E824D46C8A00A827C3 /* Keys.plist */; };
 		00ABFD0724C90E8D0061CA23 /* exportOptions.plist in Resources */ = {isa = PBXBuildFile; fileRef = 00ABFD0624C90E8D0061CA23 /* exportOptions.plist */; };
 		00F4A90524DC5978000EA651 /* Stock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F4A90424DC5978000EA651 /* Stock.swift */; };
@@ -44,8 +45,9 @@
 
 /* Begin PBXFileReference section */
 		00085A6824D913E5004F6BFF /* HomeViewRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewRow.swift; sourceTree = "<group>"; };
-		002D473F24D27D5300D51488 /* RestManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestManager.swift; sourceTree = "<group>"; };
-		002D474124D27ED800D51488 /* DataStructures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStructures.swift; sourceTree = "<group>"; };
+		0025069525139243009CCB1B /* RESTManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RESTManager.swift; sourceTree = "<group>"; };
+		0025069725139459009CCB1B /* WatchList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchList.swift; sourceTree = "<group>"; };
+		0025069925139B78009CCB1B /* StockList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockList.swift; sourceTree = "<group>"; };
 		0030FB402510FA8D000715D9 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		005A928124D133F800EAD474 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		005C87E824D46C8A00A827C3 /* Keys.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Keys.plist; sourceTree = "<group>"; };
@@ -121,8 +123,7 @@
 		005A928724D1352C00EAD474 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
-				002D473F24D27D5300D51488 /* RestManager.swift */,
-				002D474124D27ED800D51488 /* DataStructures.swift */,
+				0025069525139243009CCB1B /* RESTManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -131,6 +132,8 @@
 			isa = PBXGroup;
 			children = (
 				00F4A90424DC5978000EA651 /* Stock.swift */,
+				0025069725139459009CCB1B /* WatchList.swift */,
+				0025069925139B78009CCB1B /* StockList.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -341,14 +344,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				005C87E724D3D13700A827C3 /* DataStructures.swift in Sources */,
 				0030FB412510FA8D000715D9 /* DetailView.swift in Sources */,
+				0025069625139243009CCB1B /* RESTManager.swift in Sources */,
 				00085A6924D913E5004F6BFF /* HomeViewRow.swift in Sources */,
+				0025069825139459009CCB1B /* WatchList.swift in Sources */,
+				0025069A25139B78009CCB1B /* StockList.swift in Sources */,
 				00F4A90524DC5978000EA651 /* Stock.swift in Sources */,
 				637315DF24C54C8F00D88F29 /* AppDelegate.swift in Sources */,
 				637315E424C54C8F00D88F29 /* StockWatcher.xcdatamodeld in Sources */,
 				005A928224D133F800EAD474 /* HomeView.swift in Sources */,
-				002D474024D27D5300D51488 /* RestManager.swift in Sources */,
 				637315E124C54C8F00D88F29 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
