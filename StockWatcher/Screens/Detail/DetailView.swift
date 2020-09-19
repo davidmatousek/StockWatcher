@@ -9,13 +9,23 @@
 import SwiftUI
 
 struct DetailView: View {
+    var item: Quote
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Form {
+            Text(item.companyName)
+            Text("Close:  \(item.close ?? 0)")
+            Text(item.symbol)
+            Text(item.companyName)
+            Text(item.companyName)
+            Text(item.companyName)
+            
+        }
     }
 }
 
 struct DetailView_Previews: PreviewProvider {
     static var previews: some View {
-        DetailView()
+        DetailView(item: Quote.default)
     }
 }

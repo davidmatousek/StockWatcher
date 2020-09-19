@@ -12,7 +12,7 @@ import SwiftUI
 struct HomeView: View {
     @ObservedObject var watchList = WatchList()
     @ObservedObject var stockList = StockList()
-
+private var prod = true
 
     //I need a way to refresh teh datastore
     
@@ -20,31 +20,42 @@ struct HomeView: View {
         NavigationView {
             //List(stockList.stockList, id: \.symbol) {stockSymbol in
             List {
-                GeometryReader { g -> Text in
-                    let frame = g.frame (in:CoordinateSpace.global)
-                    if frame.origin.y > 250 {
-                        self.stockList.refreshStockList2()
-                        return Text("Loading")
-                    } else {
-                        return Text("")
-                    }
-                }
-                ForEach(stockList.stockList, id: \.symbol) {stock in
-                    NavigationLink(destination: DetailView()) {
-                        HomeViewRow(item:stock)
-                    }
-                }
-            }
-            .id(UUID())
-            .navigationTitle("My Stocks")
-            //.listStyle((GroupedListStyle()))
-        }
+  
 
-            .onAppear {
-                stockList.refreshStockList2()
+                Section{
+                    ForEach(stockList.stockList, id: \.symbol) {stock in
+                        NavigationLink(destination: DetailView(item: stock)) {
+                            HomeViewRow(item:stock)
+                        }
+                    }
+                }
+                Section {
+
+                    Link("Data provided by IEX Cloud",
+                          destination: URL(string: "https://iexcloud.io")!)
+                        .font(.footnote)
+                        .foregroundColor(.gray)
+                }
+
             }
+                .navigationBarItems(trailing:
+                                        
+                                Button(action: {stockList.refreshStockList(prod: prod)}) {
+                                                    Image(systemName: "arrow.clockwise")
+                                                        .imageScale(.large)
+                                                        .foregroundColor(.gray)
+                                                    }
+
+                            )
+                .id(UUID())
+                .navigationTitle("My Stocks")
+                .listStyle((InsetGroupedListStyle()))
+            }
+        .onAppear {
+            stockList.refreshStockList(prod: prod)
+        }
     }
-    
+  
    
 }
      
@@ -54,6 +65,3 @@ struct HomeView_Previews: PreviewProvider {
         HomeView()
     }
 }
-
-
-

@@ -12,6 +12,7 @@ class WatchList: ObservableObject {
     @Published var watchList = [String]()
     let defaults = UserDefaults.standard
     
+    
     init() {
         self.watchList = defaults.object(forKey:"Watchlist") as? [String] ?? [String]()
         

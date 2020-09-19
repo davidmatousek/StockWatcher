@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct HomeViewRow: View {
-    var item: Stock
+    var item: Quote
     //var item: Stock
 
     @ObservedObject var stockList = StockList()
@@ -30,7 +30,9 @@ struct HomeViewRow: View {
         VStack(alignment: .trailing){
             //Text(String(item.latestPrice))
            Text("$\(item.latestPrice, specifier: "%.2f")")
+            .layoutPriority(100)
            Text("$\(item.change, specifier: "%.2f") (\(item.changePercent*100, specifier: "%.2f")%)")
+            .layoutPriority(100)
             .foregroundColor(self.isRed ? .red : self.isGreen ? .green : .black)
         }.onAppear (
             perform: {
@@ -49,7 +51,7 @@ struct HomeViewRow: View {
 struct HomeViewRow_Previews: PreviewProvider {
     static var previews: some View {
         //HomeViewRow(item:StockResponse.example)
-        HomeViewRow(item:Stock.default)
+        HomeViewRow(item:Quote.default)
     }
 }
 
