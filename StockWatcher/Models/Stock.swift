@@ -11,17 +11,17 @@ import Foundation
 struct Stock: Codable {
     
     var symbol: String?
-   // let news: [News]?
+    let news: [News]?
     let quote: Quote
-    //let chart: [Chart]?
+    let chart: [Chart]?
     
     #if DEBUG
 
     static let `default` = Stock(
                                  symbol: "",
-                                //news: [],
-                                quote: Quote.default
-                                //chart: []
+                                news: [],
+                                quote: Quote.default,
+                                chart: []
                                 )
     #endif
     
