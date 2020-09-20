@@ -9,6 +9,12 @@
 /* Begin PBXBuildFile section */
 		00085A6924D913E5004F6BFF /* HomeViewRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00085A6824D913E5004F6BFF /* HomeViewRow.swift */; };
 		001E04A2251675FD00CEF2F9 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 001E04A1251675FD00CEF2F9 /* AboutView.swift */; };
+		001E04AE25167D8B00CEF2F9 /* Stock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 001E04AD25167D8B00CEF2F9 /* Stock.swift */; };
+		001E04B325167DB500CEF2F9 /* News.swift in Sources */ = {isa = PBXBuildFile; fileRef = 001E04B225167DB500CEF2F9 /* News.swift */; };
+		001E04B825167DE400CEF2F9 /* Chart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 001E04B725167DE400CEF2F9 /* Chart.swift */; };
+		001E05102516BB2200CEF2F9 /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 001E050F2516BB2200CEF2F9 /* Response.swift */; };
+		001E05162516BD9D00CEF2F9 /* CodableExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 001E05152516BD9D00CEF2F9 /* CodableExtension.swift */; };
+		001E051B25179F9200CEF2F9 /* DecodedArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 001E051A25179F9100CEF2F9 /* DecodedArray.swift */; };
 		0025069625139243009CCB1B /* RESTManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0025069525139243009CCB1B /* RESTManager.swift */; };
 		0025069825139459009CCB1B /* WatchList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0025069725139459009CCB1B /* WatchList.swift */; };
 		0025069A25139B78009CCB1B /* StockList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0025069925139B78009CCB1B /* StockList.swift */; };
@@ -48,6 +54,12 @@
 /* Begin PBXFileReference section */
 		00085A6824D913E5004F6BFF /* HomeViewRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewRow.swift; sourceTree = "<group>"; };
 		001E04A1251675FD00CEF2F9 /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
+		001E04AD25167D8B00CEF2F9 /* Stock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stock.swift; sourceTree = "<group>"; };
+		001E04B225167DB500CEF2F9 /* News.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = News.swift; sourceTree = "<group>"; };
+		001E04B725167DE400CEF2F9 /* Chart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chart.swift; sourceTree = "<group>"; };
+		001E050F2516BB2200CEF2F9 /* Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
+		001E05152516BD9D00CEF2F9 /* CodableExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableExtension.swift; sourceTree = "<group>"; };
+		001E051A25179F9100CEF2F9 /* DecodedArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecodedArray.swift; sourceTree = "<group>"; };
 		0025069525139243009CCB1B /* RESTManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RESTManager.swift; sourceTree = "<group>"; };
 		0025069725139459009CCB1B /* WatchList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchList.swift; sourceTree = "<group>"; };
 		0025069925139B78009CCB1B /* StockList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockList.swift; sourceTree = "<group>"; };
@@ -106,6 +118,15 @@
 			path = About;
 			sourceTree = "<group>";
 		};
+		001E05142516BD8200CEF2F9 /* Exrensions */ = {
+			isa = PBXGroup;
+			children = (
+				001E05152516BD9D00CEF2F9 /* CodableExtension.swift */,
+				001E051A25179F9100CEF2F9 /* DecodedArray.swift */,
+			);
+			path = Exrensions;
+			sourceTree = "<group>";
+		};
 		00269C8324D857910082E211 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
@@ -148,6 +169,10 @@
 				0025069725139459009CCB1B /* WatchList.swift */,
 				0025069925139B78009CCB1B /* StockList.swift */,
 				0025069F2515033A009CCB1B /* RefreshableScrollView.swift */,
+				001E04AD25167D8B00CEF2F9 /* Stock.swift */,
+				001E04B225167DB500CEF2F9 /* News.swift */,
+				001E04B725167DE400CEF2F9 /* Chart.swift */,
+				001E050F2516BB2200CEF2F9 /* Response.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -184,6 +209,7 @@
 		637315DD24C54C8F00D88F29 /* StockWatcher */ = {
 			isa = PBXGroup;
 			children = (
+				001E05142516BD8200CEF2F9 /* Exrensions */,
 				00269C8324D857910082E211 /* Screens */,
 				005C87EA24D46D2900A827C3 /* Property Files */,
 				005A928724D1352C00EAD474 /* Managers */,
@@ -362,7 +388,13 @@
 				0025069625139243009CCB1B /* RESTManager.swift in Sources */,
 				00085A6924D913E5004F6BFF /* HomeViewRow.swift in Sources */,
 				0025069825139459009CCB1B /* WatchList.swift in Sources */,
+				001E04B325167DB500CEF2F9 /* News.swift in Sources */,
+				001E05162516BD9D00CEF2F9 /* CodableExtension.swift in Sources */,
+				001E051B25179F9200CEF2F9 /* DecodedArray.swift in Sources */,
+				001E04B825167DE400CEF2F9 /* Chart.swift in Sources */,
+				001E04AE25167D8B00CEF2F9 /* Stock.swift in Sources */,
 				001E04A2251675FD00CEF2F9 /* AboutView.swift in Sources */,
+				001E05102516BB2200CEF2F9 /* Response.swift in Sources */,
 				0025069A25139B78009CCB1B /* StockList.swift in Sources */,
 				00F4A90524DC5978000EA651 /* Quote.swift in Sources */,
 				637315DF24C54C8F00D88F29 /* AppDelegate.swift in Sources */,

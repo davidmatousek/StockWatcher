@@ -11,7 +11,7 @@ import Combine
 import SwiftUI
 
 class StockList: ObservableObject {
-    @Published var stockList = [Quote]()
+    @Published var stockList = Response(stock: [])
     @Published var isLoadingStocks = false
     @ObservedObject var watchList = WatchList()
     @ObservedObject var rest = RESTManager()
@@ -24,12 +24,12 @@ class StockList: ObservableObject {
         
     }
     func remove(stock:Quote) {
-        if let index = self.stockList.firstIndex(where: { $0.symbol == stock.symbol }) {
-            self.stockList.remove(at: index)
-        }
+//        if let index = self.stockList.firstIndex(where: { $0.symbol == stock.symbol }) {
+//            self.stockList.remove(at: index)
+//        }
     }
     func removeAll() {
-        self.stockList.removeAll()
+        //self.stockList.removeAll()
     }
     
   
@@ -43,15 +43,20 @@ class StockList: ObservableObject {
        // self.stockList = [Stock]()
         
         //removeAll()
+        //stable/stock/market/batch?symbols=aapl,fb&types=quote,news,chart&range=1m&last=5&token=Tsk_8d37353c75bd4380939cbeab573a727b
         
-        for item in watchList.watchList {
+        //for item in watchList.watchList {
             let host = "https://sandbox.iexapis.com"
             let hostProd = "https://cloud.iexapis.com"
-            let basePath =  "/stable/stock/" + item + "/quote"
+            let basePath =  "/stable/stock/market/batch?"
+            //let symbolPath = "symbols=" + item
+            let symbolPath = "symbols=aapl,msft,nflx,googl,amzn"
+            //let symbolPath = "symbols=aapl"
+            let typesPath = "&types=quote,news,chart"
+            let rangePath = "&range=1m&last=5"
             
-
-            let urlString = host + basePath + "?token=" + token
-            let urlProdString = hostProd + basePath + "?token=" + tokenProd
+            let urlString = host + basePath + symbolPath + typesPath + rangePath + "&token=" + token
+            let urlProdString = hostProd + basePath + symbolPath + typesPath + rangePath + "&token=" + tokenProd
             
             //let urlString : String = "https://sandbox.iexapis.com/stable/stock/AAPL/quote?token=" + token
             
@@ -63,14 +68,16 @@ class StockList: ObservableObject {
             } else {
                 url = URL(string: urlString)!
             }
-            rest.fetch(url, defaultValue: Quote.default){
+            rest.fetch(url, defaultValue: Response.default){
                 print($0)
                 //print($0.latestPrice)
-                self.remove(stock:$0)
-                self.stockList.append($0)
-                self.stockList.sort { $0.symbol < $1.symbol }
+//                self.remove(stock:$0)
+                self.stockList = $0
+                //self.stockList.append($0)
+                self.stockList.stock.sort { $0.symbol! < $1.symbol! }
             }
-        }
+            //print(rest.$requests)
+        //}
 
     }
     

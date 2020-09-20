@@ -23,9 +23,9 @@ private var prod = true
   
 
                 Section{
-                    ForEach(stockList.stockList, id: \.symbol) {stock in
-                        NavigationLink(destination: DetailView(item: stock)) {
-                            HomeViewRow(item:stock)
+                    ForEach(stockList.stockList.stock, id: \.symbol) {stock in
+                        NavigationLink(destination: DetailView(item: stock.quote)) {
+                            HomeViewRow(item:stock.quote)
                         }
                     }
                 }
