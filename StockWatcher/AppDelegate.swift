@@ -14,6 +14,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var IEXProductionToken = String()
     var IEXSandboxToken = String()
+    var IEXProd = String()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -24,7 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if let dict = keys {
             self.IEXProductionToken = (dict["IEXProductionToken"] as? String)!
             self.IEXSandboxToken = (dict["IEXSandboxToken"] as? String)!
-
+            self.IEXProd = (dict["IEXProd"] as? String)!
             // Initialize Parse.
             //Parse.setApplicationId(applicationId!, clientKey: clientKey!)
         }

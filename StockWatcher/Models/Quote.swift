@@ -22,22 +22,22 @@ struct Quote: Codable {
     let companyName: String
     let primaryExchange: String
     let calculationPrice: String
-    let welcomeOpen: Date?
+    let open: Date?
     let openTime: Date?
     let openSource: String
     let close: Double?
     let closeTime: Date?
-    let closeSource: String
+    let closeSource: String?
     let high: Double?
-    let highTime: Int
-    let highSource: String
+    let highTime: Int?
+    let highSource: String?
     let low: Double?
-    let lowTime: Int
-    let lowSource: String
-    let latestPrice: Double
-    let latestSource: String
-    let latestTime: String
-    let latestUpdate: Int
+    let lowTime: Int?
+    let lowSource: String?
+    let latestPrice: Double?
+    let latestSource: String?
+    let latestTime: String?
+    let latestUpdate: Int?
     let latestVolume: Int?
     let iexRealtimePrice: Double?
     let iexRealtimeSize: Int?
@@ -50,14 +50,14 @@ struct Quote: Codable {
     let extendedChange: Double?
     let extendedChangePercent: Double?
     let extendedPriceTime: Date?
-    let previousClose: Double
-    let previousVolume: Int
-    let change: Double
-    let changePercent: Double
+    let previousClose: Double?
+    let previousVolume: Int?
+    let change: Double?
+    let changePercent: Double?
     let volume: Int?
     let iexMarketPercent: Double?
     let iexVolume: Int?
-    let avgTotalVolume: Int
+    let avgTotalVolume: Int?
     let iexBidPrice: Double?
     let iexBidSize: Int?
     let iexAskPrice: Int?
@@ -66,13 +66,13 @@ struct Quote: Codable {
     let iexOpenTime: Date?
     let iexClose: Double?
     let iexCloseTime: Date?
-    let marketCap: Int
-    let peRatio: Double
-    let week52High: Double
-    let week52Low: Double
-    let ytdChange: Double
+    let marketCap: Int?
+    let peRatio: Double?
+    let week52High: Double?
+    let week52Low: Double?
+    let ytdChange: Double?
     let lastTradeTime: Date?
-    let isUSMarketOpen: Bool
+    let isUSMarketOpen: Bool?
 
     
    // var latestPrice:Double
@@ -86,7 +86,7 @@ struct Quote: Codable {
                                 companyName: "error",
                                 primaryExchange: "",
                                 calculationPrice: "",
-                                welcomeOpen: nil,
+                                open: nil,
                                 openTime: nil,
                                 openSource: "",
                                 close: nil,

@@ -39,6 +39,7 @@ class StockList: ObservableObject {
         let delegate = UIApplication.shared.delegate as! AppDelegate
         let token = delegate.IEXSandboxToken
         let tokenProd = delegate.IEXProductionToken
+        let prod = delegate.IEXProd
 
        // self.stockList = [Stock]()
         
@@ -46,12 +47,16 @@ class StockList: ObservableObject {
         //stable/stock/market/batch?symbols=aapl,fb&types=quote,news,chart&range=1m&last=5&token=Tsk_8d37353c75bd4380939cbeab573a727b
         
         //for item in watchList.watchList {
+        
+        
+
+        
             let host = "https://sandbox.iexapis.com"
             let hostProd = "https://cloud.iexapis.com"
             let basePath =  "/stable/stock/market/batch?"
             //let symbolPath = "symbols=" + item
             let symbolPath = "symbols=aapl,msft,nflx,googl,amzn"
-            //let symbolPath = "symbols=aapl"
+           // let symbolPath = "symbols=aapl"
             let typesPath = "&types=quote,news,chart"
             let rangePath = "&range=1m&last=5"
             
@@ -61,11 +66,13 @@ class StockList: ObservableObject {
             //let urlString : String = "https://sandbox.iexapis.com/stable/stock/AAPL/quote?token=" + token
             
             var url:URL
-            print("url:\(urlProdString)")
+            
             //ERROR HERE IF YOU DON'T REPLQCE YOUR TOKIN's
-            if environment {
+            if prod == "true" {
+                print("url:\(urlProdString)")
                 url = URL(string: urlProdString)!
             } else {
+                print("url:\(urlString)")
                 url = URL(string: urlString)!
             }
             rest.fetch(url, defaultValue: Response.default){

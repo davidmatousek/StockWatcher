@@ -29,17 +29,19 @@ struct HomeViewRow: View {
         Spacer()
         VStack(alignment: .trailing){
             //Text(String(item.latestPrice))
-           Text("$\(item.latestPrice, specifier: "%.2f")")
+           Text("$\(item.latestPrice!, specifier: "%.2f")")
+            .font(.caption)
             .layoutPriority(100)
-           Text("$\(item.change, specifier: "%.2f") (\(item.changePercent*100, specifier: "%.2f")%)")
+           Text("$\(item.change!, specifier: "%.2f") (\(item.changePercent!*100, specifier: "%.2f")%)")
+            .font(.caption)
             .layoutPriority(100)
             .foregroundColor(self.isRed ? .red : self.isGreen ? .green : .black)
         }.onAppear (
             perform: {
-                if item.change > 0.0 {
+                if item.change! > 0.0 {
                     self.isGreen = true
                 }
-                if item.change < 0.0  {
+                if item.change! < 0.0  {
                     self.isRed = true
                 }
             }
