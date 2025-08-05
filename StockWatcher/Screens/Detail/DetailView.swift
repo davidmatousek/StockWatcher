@@ -85,73 +85,55 @@ struct LineChart: View {
 }
 struct DetailView: View {
     public var item: Stock
-    //ate private var data = [DataPoint]()
     @State private var data = makeDataPoints(item: Stock.default)
     
     init(item: Stock) {
         self.item = item
-        //data = DetailView.makeDataPoints(item: item)
     }
     var body: some View {
         Form {
             Section {
                 LineChart(dataPoints: data, lineColor: .blue, lineWidth: 2, pointColor: .red, pointSize: 1)
                     .frame(width: 300, height: 200)
-//                    .onTapGesture {
-//                        data = Self.makeDataPoints()
-//                    }
                     .onAppear(perform: {
                         data = DetailView.makeDataPoints(item: item)
                     })
             }
             Section(header: Text("Stock Information")) {
                 Text(item.quote.companyName)
-                Text("Close:  \(item.quote.close ?? 0)")
+                Text("Previous Close:  \(item.quote.previousClose)")
+                Text("Current Price:  $\(item.quote.latestPrice ?? 0.0, specifier: "%.2f")")
+                Text("Change: $\(item.quote.changeValue ?? 0.0, specifier: "%.2f") (\(item.quote.changePercentValue ?? 0.0, specifier: "%.2f")%)")
                 Text(item.quote.symbol)
             }
-            Section(header: Text("News")) {
-                List(item.news!, id: \.datetime) { newsItem in
-                    Text(newsItem.headline!)
-                }
-            }
+            // News section removed - not available in simplified Stock model
         }
     }
     static func makeDataPoints(item: Stock) -> [DataPoint] {
-//        var isGoingUp = true
-//        var currentValue = 50.0
-//
-//        return (1...10).map { _ in
-//            if isGoingUp {
-//                currentValue += Double.random(in: 1...10)
-//            } else {
-//                currentValue -= Double.random(in: 1...10)
-//            }
-//
-//            if isGoingUp {
-//                if Int.random(in: 0..<10) == 0 {
-//                    isGoingUp.toggle()
-//                }
-//            } else {
-//                if Int.random(in: 0..<7) == 0 {
-//                    isGoingUp.toggle()
-//                }
-//            }
-//
-//            return DataPoint(value: abs(currentValue))
-//            }
-        var tempArray = [DataPoint]()
-        let k = item.chart!.count-1
-        for i in stride(from: 0, through: k, by: 1) {
-            let point = item.chart![i]
-            tempArray.append(DataPoint(value: point.uClose!))
+        // Generate mock chart data based on current price
+        let basePrice = item.quote.latestPrice ?? 100.0
+        var isGoingUp = true
+        var currentValue = basePrice
+        
+        return (1...10).map { _ in
+            if isGoingUp {
+                currentValue += Double.random(in: 0.5...3.0)
+            } else {
+                currentValue -= Double.random(in: 0.5...3.0)
+            }
+            
+            if isGoingUp {
+                if Int.random(in: 0..<10) == 0 {
+                    isGoingUp.toggle()
+                }
+            } else {
+                if Int.random(in: 0..<7) == 0 {
+                    isGoingUp.toggle()
+                }
+            }
+            
+            return DataPoint(value: abs(currentValue))
         }
-        return tempArray
-//        return (0...item.chart!.count-1).map { i in
-//            let point = item.chart![i]
-//
-//
-//            return DataPoint(value: point.uClose!)
-//                }
     }
 }
 

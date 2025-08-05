@@ -10,43 +10,39 @@ import SwiftUI
 
 struct HomeViewRow: View {
     var item: Quote
-    //var item: Stock
-
-    @ObservedObject var stockList = StockList()
-    @State private var isRed: Bool = false
-    @State private var isGreen: Bool = false
     
-    
+    // Computed property for change color
+    private var changeColor: Color {
+        guard let changeValue = item.changeValue else { return .primary }
+        if changeValue > 0.0 {
+            return .green
+        } else if changeValue < 0.0 {
+            return .red
+        } else {
+            return .primary
+        }
+    }
     
     var body: some View {
-        VStack(alignment: .leading) {
-            Text(item.symbol)
-            Spacer()
-            Text(item.companyName)
-                .font(.caption)
-        }
-        
-        Spacer()
-        VStack(alignment: .trailing){
-            //Text(String(item.latestPrice))
-           Text("$\(item.latestPrice!, specifier: "%.2f")")
-            .font(.caption)
-            .layoutPriority(100)
-           Text("$\(item.change!, specifier: "%.2f") (\(item.changePercent!*100, specifier: "%.2f")%)")
-            .font(.caption)
-            .layoutPriority(100)
-            .foregroundColor(self.isRed ? .red : self.isGreen ? .green : .black)
-        }.onAppear (
-            perform: {
-                if item.change! > 0.0 {
-                    self.isGreen = true
-                }
-                if item.change! < 0.0  {
-                    self.isRed = true
-                }
+        HStack {
+            VStack(alignment: .leading) {
+                Text(item.symbol)
+                Spacer()
+                Text(item.companyName)
+                    .font(.caption)
             }
-        )
-
+            
+            Spacer()
+            VStack(alignment: .trailing){
+                Text("$\(item.latestPrice ?? 0.0, specifier: "%.2f")")
+                 .font(.caption)
+                 .layoutPriority(100)
+                Text("$\(item.changeValue ?? 0.0, specifier: "%.2f") (\(item.changePercentValue ?? 0.0, specifier: "%.2f")%)")
+                 .font(.caption)
+                 .layoutPriority(100)
+                 .foregroundColor(changeColor)
+            }
+        }
     }
 }
 

@@ -9,11 +9,14 @@ jobs:
     runs-on: macOS-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v1
-      - name: Force XCode 11.3
-        run: sudo xcode-select -switch /Applications/Xcode_11.3.app
-      - name: Testing Swift package
-
-        run: chmod +x ./.github/scripts/test_swift_package.sh
-      - name: Testing iOS app
-        run: chmod +x ./.github/scripts/test_app.sh
+        uses: actions/checkout@v4
+      - name: Set up Xcode
+        uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: latest-stable
+      - name: Build and Test iOS app
+        run: |
+          xcodebuild -project StockWatcher.xcodeproj \
+                     -scheme StockWatcher \
+                     -destination 'platform=iOS Simulator,name=iPhone 16,OS=latest' \
+                     clean build test
