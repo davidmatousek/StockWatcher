@@ -38,13 +38,7 @@ class StockWatcherUITests: XCTestCase {
     func testLaunchPerformance() throws {
         if #available(macOS 10.15, iOS 13.0, tvOS 13.0, *) {
             // This measures how long it takes to launch your application.
-            let launchMetric = XCTOSSignpostMetric.applicationLaunch
-            let measureOptions = XCTMeasureOptions.default
-            // Relax constraints for CI environment
-            measureOptions.maxPercentRelativeStandardDeviation = 25.0
-            measureOptions.maxPercentRegression = 25.0
-            
-            measure(metrics: [launchMetric], options: measureOptions) {
+            measure(metrics: [XCTApplicationLaunchMetric()]) {
                 XCUIApplication().launch()
             }
         }
