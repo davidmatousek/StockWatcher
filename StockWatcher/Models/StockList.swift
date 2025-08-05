@@ -22,6 +22,12 @@ enum Configuration {
               let plist = NSDictionary(contentsOfFile: path),
               let key = plist["AlphaVantageAPIKey"] as? String,
               !key.isEmpty else {
+            
+            // For testing environments, return a placeholder key to prevent crashes
+            if ProcessInfo.processInfo.environment["XCTestConfigurationFilePath"] != nil {
+                return "TESTING_PLACEHOLDER_KEY"
+            }
+            
             fatalError("""
                 Alpha Vantage API Key not found!
                 
