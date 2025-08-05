@@ -138,11 +138,43 @@ This codebase follows iOS development best practices:
 - ✅ **Architecture**: Clean separation of concerns, proper MVVM patterns
 - ✅ **Maintainability**: Clear code structure, no debug artifacts in production
 
+## CI/CD & Testing
+
+### GitHub Actions Workflow
+- **Workflow File**: `.github/workflows/Testing.yml`
+- **Triggers**: Pull requests to master branch
+- **Environment**: macOS-latest with latest-stable Xcode
+- **Test Target**: iPhone 16 Simulator with latest iOS
+- **Status**: ✅ All checks passing
+
+### Test Environment
+- **Unit Tests**: `StockWatcherTests/` - Basic unit test structure
+- **UI Tests**: `StockWatcherUITests/` - Launch performance and UI validation tests
+- **Test Configuration**: Automatic placeholder API key injection for test environments
+- **Performance Testing**: Launch metrics using `XCTApplicationLaunchMetric`
+
+### Build & Test Commands
+```bash
+# Local testing
+xcodebuild -project StockWatcher.xcodeproj \
+           -scheme StockWatcher \
+           -destination 'platform=iOS Simulator,name=iPhone 16,OS=latest' \
+           clean build test
+
+# CI/CD testing (matches GitHub Actions)
+export ALPHA_VANTAGE_API_KEY="test_key"
+xcodebuild test -project StockWatcher.xcodeproj -scheme StockWatcher
+```
+
 ## Recent Improvements (2025)
 
-- Migrated from IEX Cloud to Alpha Vantage API
-- Implemented secure API key management
-- Eliminated SwiftUI anti-patterns and force unwrapping
-- Added comprehensive error handling and user feedback
-- Optimized view performance and memory usage
-- Updated for iOS 14+ compatibility while maintaining modern patterns
+- ✅ **API Migration**: Complete migration from IEX Cloud to Alpha Vantage API
+- ✅ **Security Enhancements**: Implemented secure API key management with environment variable support
+- ✅ **Code Quality**: Eliminated SwiftUI anti-patterns and force unwrapping throughout codebase
+- ✅ **Error Handling**: Added comprehensive error handling with user-friendly messages
+- ✅ **Performance**: Optimized view performance and memory usage patterns
+- ✅ **Testing Infrastructure**: Fixed all UI test compilation errors and performance test compatibility
+- ✅ **CI/CD Pipeline**: Updated GitHub Actions workflow for modern Xcode and iOS deployment targets
+- ✅ **Deployment Targets**: Unified iOS deployment target to 14.0 across all test targets
+- ✅ **Test Environment**: Added automatic test environment detection and safe API key handling
+- ✅ **Compatibility**: Updated for iOS 14+ while maintaining modern SwiftUI patterns
