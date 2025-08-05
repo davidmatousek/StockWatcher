@@ -28,14 +28,17 @@ class StockWatcherUITests: XCTestCase {
         let app = XCUIApplication()
         app.launch()
 
-        // Use recording to get started writing UI tests.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+        // Verify that the main navigation title exists
+        XCTAssertTrue(app.navigationBars["My Stocks"].exists)
+        
+        // Verify that basic UI elements are present
+        XCTAssertTrue(app.buttons["Refresh"].exists || app.buttons.containing(NSPredicate(format: "label CONTAINS 'Refresh'")).count > 0)
     }
 
     func testLaunchPerformance() throws {
         if #available(macOS 10.15, iOS 13.0, tvOS 13.0, *) {
             // This measures how long it takes to launch your application.
-            measure(metrics: [XCTOSSignpostMetric.applicationLaunch]) {
+            measure(metrics: [XCTApplicationLaunchMetric()]) {
                 XCUIApplication().launch()
             }
         }
