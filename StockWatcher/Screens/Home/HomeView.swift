@@ -12,13 +12,10 @@ import SwiftUI
 struct HomeView: View {
     @ObservedObject var watchList = WatchList()
     @ObservedObject var stockList = StockList()
-private var prod = true
-
-    //I need a way to refresh teh datastore
+    private var prod = true
     
     var body: some View {
         NavigationView {
-            //List(stockList.stockList, id: \.symbol) {stockSymbol in
             List {
   
 
@@ -30,14 +27,23 @@ private var prod = true
                     }
                 }
                 Section {
-
-                    Link("Data provided by IEX Cloud",
-                          destination: URL(string: "https://iexcloud.io")!)
+                    Link("Data provided by Alpha Vantage",
+                          destination: URL(string: "https://www.alphavantage.co")!)
                         .font(.footnote)
                         .foregroundColor(.gray)
                 }
 
             }
+                .alert(isPresented: $stockList.hasError) {
+                    Alert(
+                        title: Text("Error"),
+                        message: Text(stockList.errorMessage ?? "An unknown error occurred"),
+                        primaryButton: .default(Text("Retry")) {
+                            stockList.refreshStockList(prod: prod)
+                        },
+                        secondaryButton: .cancel()
+                    )
+                }
                 .navigationBarItems(trailing:
                                         
                                 Button(action: {stockList.refreshStockList(prod: prod)}) {
@@ -47,9 +53,9 @@ private var prod = true
                                                     }
 
                             )
-                .id(UUID())
+                // Removed .id(UUID()) to prevent unnecessary view recreation
                 .navigationTitle("My Stocks")
-                .listStyle((InsetGroupedListStyle()))
+                .listStyle(InsetGroupedListStyle())
             }
         .onAppear {
             stockList.refreshStockList(prod: prod)

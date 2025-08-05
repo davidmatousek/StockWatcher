@@ -12,23 +12,8 @@ import CoreData
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-    var IEXProductionToken = String()
-    var IEXSandboxToken = String()
-    var IEXProd = String()
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        var keys: NSDictionary?
-        if let path = Bundle.main.path(forResource: "Keys", ofType: "plist") {
-               keys = NSDictionary(contentsOfFile: path)
-           }
-        if let dict = keys {
-            self.IEXProductionToken = (dict["IEXProductionToken"] as? String)!
-            self.IEXSandboxToken = (dict["IEXSandboxToken"] as? String)!
-            self.IEXProd = (dict["IEXProd"] as? String)!
-            // Initialize Parse.
-            //Parse.setApplicationId(applicationId!, clientKey: clientKey!)
-        }
         return true
     }
 
@@ -69,7 +54,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                  * The store could not be migrated to the current model version.
                  Check the error message to determine what the actual problem was.
                  */
-                fatalError("Unresolved error \(error), \(error.userInfo)")
+                // Handle Core Data errors gracefully in production
+                print("Core Data error: \(error), \(error.userInfo)")
+                // TODO: Show user-friendly error message
             }
         })
         return container
@@ -86,7 +73,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 // Replace this implementation with code to handle the error appropriately.
                 // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
                 let nserror = error as NSError
-                fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+                // Handle save errors gracefully in production
+                print("Core Data save error: \(nserror), \(nserror.userInfo)")
+                // TODO: Show user-friendly error message
             }
         }
     }

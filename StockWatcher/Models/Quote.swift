@@ -1,143 +1,84 @@
 //
-//  StockResponse.swift
+//  Quote.swift
 //  StockWatcher
 //
-//  Created by Matousek, David on 8/6/20.
-//  Copyright © 2020 David Matousek. All rights reserved.
+//  Updated for Alpha Vantage API
 //
-/*
- {"symbol":"AAPL","companyName":"Apple, Inc.","primaryExchange":"NASDAQ","calculationPrice":"close","open":110.41,"openTime":1600435801331,"openSource":"official","close":106.84,"closeTime":1600459201291,"closeSource":"official","high":110.88,"highTime":1600473599055,"highSource":"15 minute delayed price","low":106.09,"lowTime":1600450273472,"lowSource":"15 minute delayed price","latestPrice":106.84,"latestSource":"Close","latestTime":"September 18, 2020","latestUpdate":1600459201291,"latestVolume":287104882,"iexRealtimePrice":null,"iexRealtimeSize":null,"iexLastUpdated":null,"delayedPrice":106.93,"delayedPriceTime":1600473599055,"oddLotDelayedPrice":127.67,"oddLotDelayedPriceTime":1600462729838,"extendedPrice":106.93,"extendedChange":0.09,"extendedChangePercent":0.00084,"extendedPriceTime":1600473599055,"previousClose":110.34,"previousVolume":178010968,"change":-3.5,"changePercent":-0.03172,"volume":287104882,"iexMarketPercent":null,"iexVolume":null,"avgTotalVolume":197471715,"iexBidPrice":null,"iexBidSize":null,"iexAskPrice":null,"iexAskSize":null,"iexOpen":null,"iexOpenTime":null,"iexClose":106.86,"iexCloseTime":1600459196732,"marketCap":1852317132000,"peRatio":32.2,"week52High":137.98,"week52Low":53.15,"ytdChange":0.437766,"lastTradeTime":1600459204365,"isUSMarketOpen":false}
- */
+
 import Foundation
 
 extension Quote: Identifiable {
-    var id: UUID {
-        return UUID()
+    var id: String {
+        return symbol
     }
 }
 
-struct Quote: Codable {
-    //let id = UUID()
-    let symbol: String
-    let companyName: String
-    let primaryExchange: String
-    let calculationPrice: String
-    let open: Date?
-    let openTime: Date?
-    let openSource: String
-    let close: Double?
-    let closeTime: Date?
-    let closeSource: String?
-    let high: Double?
-    let highTime: Int?
-    let highSource: String?
-    let low: Double?
-    let lowTime: Int?
-    let lowSource: String?
-    let latestPrice: Double?
-    let latestSource: String?
-    let latestTime: String?
-    let latestUpdate: Int?
-    let latestVolume: Int?
-    let iexRealtimePrice: Double?
-    let iexRealtimeSize: Int?
-    let iexLastUpdated: Int?
-    let delayedPrice: Double?
-    let delayedPriceTime: Double?
-    let oddLotDelayedPrice: Double?
-    let oddLotDelayedPriceTime: Double?
-    let extendedPrice: Double?
-    let extendedChange: Double?
-    let extendedChangePercent: Double?
-    let extendedPriceTime: Date?
-    let previousClose: Double?
-    let previousVolume: Int?
-    let change: Double?
-    let changePercent: Double?
-    let volume: Int?
-    let iexMarketPercent: Double?
-    let iexVolume: Int?
-    let avgTotalVolume: Int?
-    let iexBidPrice: Double?
-    let iexBidSize: Int?
-    let iexAskPrice: Int?
-    let iexAskSize: Int?
-    let iexOpen: Double?
-    let iexOpenTime: Date?
-    let iexClose: Double?
-    let iexCloseTime: Date?
-    let marketCap: Int?
-    let peRatio: Double?
-    let week52High: Double?
-    let week52Low: Double?
-    let ytdChange: Double?
-    let lastTradeTime: Date?
-    let isUSMarketOpen: Bool?
-
+// Alpha Vantage Global Quote Response wrapper
+struct AlphaVantageResponse: Codable {
+    let globalQuote: Quote
     
-   // var latestPrice:Double
-    //var previousClose:Double
+    private enum CodingKeys: String, CodingKey {
+        case globalQuote = "Global Quote"
+    }
+}
+
+// Alpha Vantage Quote model matching their API response
+struct Quote: Codable {
+    let symbol: String
+    let open: String
+    let high: String
+    let low: String
+    let price: String
+    let volume: String
+    let latestTradingDay: String
+    let previousClose: String
+    let change: String
+    let changePercent: String
+    
+    private enum CodingKeys: String, CodingKey {
+        case symbol = "01. symbol"
+        case open = "02. open"
+        case high = "03. high"
+        case low = "04. low"
+        case price = "05. price"
+        case volume = "06. volume"
+        case latestTradingDay = "07. latest trading day"
+        case previousClose = "08. previous close"
+        case change = "09. change"
+        case changePercent = "10. change percent"
+    }
+    
+    // Convenience computed properties for backwards compatibility
+    var latestPrice: Double? {
+        return Double(price)
+    }
+    
+    var companyName: String {
+        return symbol // Alpha Vantage doesn't provide company name in quote
+    }
+    
+    var changeValue: Double? {
+        return Double(change)
+    }
+    
+    var changePercentValue: Double? {
+        let cleanPercent = changePercent.replacingOccurrences(of: "%", with: "")
+        return Double(cleanPercent)
+    }
     
     #if DEBUG
-    //static let example = StockResponse(id: UUID(), symbol: "aapl", companyName:"apple", primaryExchange:"",calculationPrice:"3",latestPrice:400,previousClose:390)
-    //static let `default` = StockResponse(id: UUID(), symbol: "aapl", companyName:"apple", primaryExchange:"",calculationPrice:"3",latestPrice:400,previousClose:390)
-    static let `default` = Quote(//id: UUID(),
-                                symbol: "error",
-                                companyName: "error",
-                                primaryExchange: "",
-                                calculationPrice: "",
-                                open: nil,
-                                openTime: nil,
-                                openSource: "",
-                                close: nil,
-                                closeTime: nil,
-                                closeSource: "",
-                                high: 0.0,
-                                highTime: 0,
-                                highSource: "",
-                                low: 0.0,
-                                lowTime: 0,
-                                lowSource: "",
-                                latestPrice: 0.0,
-                                latestSource: "",
-                                latestTime: "",
-                                latestUpdate: 0,
-                                latestVolume: nil,
-                                iexRealtimePrice: 0.0,
-                                iexRealtimeSize: 0,
-                                iexLastUpdated: 0,
-                                delayedPrice:  nil,
-                                delayedPriceTime:  nil,
-                                oddLotDelayedPrice:  nil,
-                                oddLotDelayedPriceTime:  nil,
-                                extendedPrice: nil,
-                                extendedChange: nil,
-                                extendedChangePercent: nil,
-                                extendedPriceTime: nil,
-                                previousClose: 0.0,
-                                previousVolume: 0,
-                                change: 0.0,
-                                changePercent: 0.0,
-                                volume: 0,
-                                iexMarketPercent: 0.0,
-                                iexVolume: 0,
-                                avgTotalVolume: 0,
-                                iexBidPrice: 0.0,
-                                iexBidSize: 0,
-                                iexAskPrice: 0,
-                                iexAskSize: 0,
-                                iexOpen: nil,
-                                iexOpenTime: nil,
-                                iexClose: nil,
-                                iexCloseTime: nil,
-                                marketCap: 0,
-                                peRatio: 0.0,
-                                week52High: 0.0,
-                                week52Low: 0.0,
-                                ytdChange: 0.0,
-                                lastTradeTime: nil,
-                                isUSMarketOpen: false
-                                )
+    static let `default` = Quote(
+        symbol: "AAPL",
+        open: "150.00",
+        high: "155.00",
+        low: "148.00",
+        price: "152.50",
+        volume: "1000000",
+        latestTradingDay: "2025-01-01",
+        previousClose: "151.00",
+        change: "1.50",
+        changePercent: "0.99%"
+    )
     #endif
 }
 

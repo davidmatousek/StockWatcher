@@ -2,17 +2,75 @@
 //  StockList.swift
 //  StockWatcher
 //
-//  Created by Matousek, David on 9/17/20.
-//  Copyright © 2020 David Matousek. All rights reserved.
+//  Updated for Alpha Vantage API
 //
 
 import Foundation
 import Combine
 import SwiftUI
 
+// Temporary Configuration until we can add the separate Configuration.swift file to the Xcode project
+enum Configuration {
+    static var alphaVantageAPIKey: String {
+        // First try environment variable (for CI/CD and development)
+        if let envKey = ProcessInfo.processInfo.environment["ALPHA_VANTAGE_API_KEY"] {
+            return envKey
+        }
+        
+        // Fallback to Info.plist (for local development - not committed)
+        guard let path = Bundle.main.path(forResource: "Keys", ofType: "plist"),
+              let plist = NSDictionary(contentsOfFile: path),
+              let key = plist["AlphaVantageAPIKey"] as? String,
+              !key.isEmpty else {
+            fatalError("""
+                Alpha Vantage API Key not found!
+                
+                Please set up your API key using one of these methods:
+                1. Set environment variable: ALPHA_VANTAGE_API_KEY
+                2. Add your key to StockWatcher/Property Files/Keys.plist
+                
+                Get a free API key at: https://www.alphavantage.co/support/#api-key
+                """)
+        }
+        
+        return key
+    }
+    
+    static let alphaVantageBaseURL = "https://www.alphavantage.co/query"
+}
+
+// Temporary StockError until we can add the separate StockError.swift file to the Xcode project
+enum StockError: Error, LocalizedError {
+    case networkFailure
+    case invalidData
+    case apiKeyMissing
+    case rateLimitExceeded
+    case invalidSymbol(String)
+    case unknown(Error)
+    
+    var errorDescription: String? {
+        switch self {
+        case .networkFailure:
+            return "Unable to connect to the stock data service. Please check your internet connection."
+        case .invalidData:
+            return "The stock data received was invalid or corrupted."
+        case .apiKeyMissing:
+            return "API key is missing or invalid. Please check your configuration."
+        case .rateLimitExceeded:
+            return "API rate limit exceeded. Please wait a moment before refreshing."
+        case .invalidSymbol(let symbol):
+            return "Invalid stock symbol: \(symbol)"
+        case .unknown(let error):
+            return "An unexpected error occurred: \(error.localizedDescription)"
+        }
+    }
+}
+
 class StockList: ObservableObject {
     @Published var stockList = Response(stock: [])
     @Published var isLoadingStocks = false
+    @Published var errorMessage: String?
+    @Published var hasError = false
     @ObservedObject var watchList = WatchList()
     @ObservedObject var rest = RESTManager()
     
@@ -20,72 +78,72 @@ class StockList: ObservableObject {
         
     }
     
-    func add(stock:Quote) {
+    func add(stock: Quote) {
         
     }
-    func remove(stock:Quote) {
-//        if let index = self.stockList.firstIndex(where: { $0.symbol == stock.symbol }) {
-//            self.stockList.remove(at: index)
-//        }
+    
+    func remove(stock: Quote) {
+        
     }
+    
     func removeAll() {
-        //self.stockList.removeAll()
+        
     }
     
-  
+    private func handleError(_ error: StockError) {
+        DispatchQueue.main.async {
+            self.isLoadingStocks = false
+            self.hasError = true
+            self.errorMessage = error.localizedDescription
+        }
+    }
     
-    func refreshStockList(prod environment:Bool) {
-        isLoadingStocks.toggle()
-        let delegate = UIApplication.shared.delegate as! AppDelegate
-        let token = delegate.IEXSandboxToken
-        let tokenProd = delegate.IEXProductionToken
-        let prod = delegate.IEXProd
-
-       // self.stockList = [Stock]()
+    func refreshStockList(prod environment: Bool) {
+        isLoadingStocks = true
+        hasError = false
+        errorMessage = nil
         
-        //removeAll()
-        //stable/stock/market/batch?symbols=aapl,fb&types=quote,news,chart&range=1m&last=5&token=Tsk_8d37353c75bd4380939cbeab573a727b
+        let apiKey: String
+        do {
+            apiKey = Configuration.alphaVantageAPIKey
+        } catch {
+            handleError(.apiKeyMissing)
+            return
+        }
         
-        //for item in watchList.watchList {
+        // List of stocks to fetch
+        let symbols = ["AAPL", "MSFT", "NFLX", "GOOGL", "AMZN"]
+        var fetchedStocks: [Stock] = []
+        let dispatchGroup = DispatchGroup()
         
-        
-
-        
-            let host = "https://sandbox.iexapis.com"
-            let hostProd = "https://cloud.iexapis.com"
-            let basePath =  "/stable/stock/market/batch?"
-            //let symbolPath = "symbols=" + item
-            let symbolPath = "symbols=aapl,msft,nflx,googl,amzn"
-           // let symbolPath = "symbols=aapl"
-            let typesPath = "&types=quote,news,chart"
-            let rangePath = "&range=1m&last=5"
+        // Fetch each stock individually (Alpha Vantage doesn't support batch requests on free tier)
+        for symbol in symbols {
+            dispatchGroup.enter()
+            let urlString = "\(Configuration.alphaVantageBaseURL)?function=GLOBAL_QUOTE&symbol=\(symbol)&apikey=\(apiKey)"
             
-            let urlString = host + basePath + symbolPath + typesPath + rangePath + "&token=" + token
-            let urlProdString = hostProd + basePath + symbolPath + typesPath + rangePath + "&token=" + tokenProd
+            guard let url = URL(string: urlString) else { 
+                dispatchGroup.leave()
+                continue 
+            }
             
-            //let urlString : String = "https://sandbox.iexapis.com/stable/stock/AAPL/quote?token=" + token
             
-            var url:URL
-            
-            //ERROR HERE IF YOU DON'T REPLQCE YOUR TOKIN's
-            if prod == "true" {
-                print("url:\(urlProdString)")
-                url = URL(string: urlProdString)!
+            rest.fetch(url, defaultValue: AlphaVantageResponse(globalQuote: Quote.default)) { response in
+                let stock = Stock(symbol: response.globalQuote.symbol, quote: response.globalQuote)
+                fetchedStocks.append(stock)
+                dispatchGroup.leave()
+            }
+        }
+        
+        // Update UI when all stocks are fetched
+        dispatchGroup.notify(queue: .main) {
+            if fetchedStocks.isEmpty {
+                self.handleError(.networkFailure)
             } else {
-                print("url:\(urlString)")
-                url = URL(string: urlString)!
+                self.stockList = Response(stock: fetchedStocks.sorted { 
+                    ($0.symbol ?? "") < ($1.symbol ?? "")
+                })
+                self.isLoadingStocks = false
             }
-            rest.fetch(url, defaultValue: Response.default){
-                print($0)
-                //print($0.latestPrice)
-//                self.remove(stock:$0)
-                self.stockList = $0
-                //self.stockList.append($0)
-                self.stockList.stock.sort { $0.symbol! < $1.symbol! }
-            }
-            //print(rest.$requests)
-        //}
-
+        }
     }
-    
 }

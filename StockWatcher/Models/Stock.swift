@@ -9,21 +9,20 @@
 import Foundation
 
 struct Stock: Codable {
-    
     var symbol: String?
-    let news: [News]?
     let quote: Quote
-    let chart: [Chart]?
+    // Simplified for Alpha Vantage - we'll fetch news and charts separately if needed
+    
+    init(symbol: String?, quote: Quote) {
+        self.symbol = symbol
+        self.quote = quote
+    }
     
     #if DEBUG
-
     static let `default` = Stock(
-                                 symbol: "",
-                                news: [],
-                                quote: Quote.default,
-                                chart: []
-                                )
+        symbol: "AAPL",
+        quote: Quote.default
+    )
     #endif
-    
 }
 
