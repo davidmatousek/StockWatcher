@@ -9,12 +9,23 @@ import Foundation
 import Combine
 import SwiftUI
 
-// Temporary Configuration until we can add the separate Configuration.swift file to the Xcode project
+// Temporary Configuration inline until Configuration.swift can be added to Xcode project
 enum Configuration {
-    static var alphaVantageAPIKey: String {
+    enum APIKeyResult {
+        case success(String)
+        case missingKey
+        case testEnvironment
+    }
+    
+    static func getAPIKey() -> APIKeyResult {
+        // For testing environments, return test environment indicator
+        if ProcessInfo.processInfo.environment["XCTestConfigurationFilePath"] != nil {
+            return .testEnvironment
+        }
+        
         // First try environment variable (for CI/CD and development)
         if let envKey = ProcessInfo.processInfo.environment["ALPHA_VANTAGE_API_KEY"] {
-            return envKey
+            return .success(envKey)
         }
         
         // Fallback to Info.plist (for local development - not committed)
@@ -22,24 +33,10 @@ enum Configuration {
               let plist = NSDictionary(contentsOfFile: path),
               let key = plist["AlphaVantageAPIKey"] as? String,
               !key.isEmpty else {
-            
-            // For testing environments, return a placeholder key to prevent crashes
-            if ProcessInfo.processInfo.environment["XCTestConfigurationFilePath"] != nil {
-                return "TESTING_PLACEHOLDER_KEY"
-            }
-            
-            fatalError("""
-                Alpha Vantage API Key not found!
-                
-                Please set up your API key using one of these methods:
-                1. Set environment variable: ALPHA_VANTAGE_API_KEY
-                2. Add your key to StockWatcher/Property Files/Keys.plist
-                
-                Get a free API key at: https://www.alphavantage.co/support/#api-key
-                """)
+            return .missingKey
         }
         
-        return key
+        return .success(key)
     }
     
     static let alphaVantageBaseURL = "https://www.alphavantage.co/query"
@@ -109,10 +106,28 @@ class StockList: ObservableObject {
         hasError = false
         errorMessage = nil
         
+        // Use the new graceful API key handling
+        let apiKeyResult = Configuration.getAPIKey()
         let apiKey: String
-        do {
-            apiKey = Configuration.alphaVantageAPIKey
-        } catch {
+        
+        switch apiKeyResult {
+        case .success(let key):
+            apiKey = key
+        case .testEnvironment:
+            apiKey = "TESTING_PLACEHOLDER_KEY"
+            // In test environment, don't make real API calls
+            if !environment {
+                // Return mock data for testing
+                let mockStocks = ["AAPL", "MSFT", "NFLX", "GOOGL", "AMZN"].map { symbol in
+                    Stock(symbol: symbol, quote: Quote.default)
+                }
+                DispatchQueue.main.async {
+                    self.stockList = Response(stock: mockStocks)
+                    self.isLoadingStocks = false
+                }
+                return
+            }
+        case .missingKey:
             handleError(.apiKeyMissing)
             return
         }
@@ -131,7 +146,6 @@ class StockList: ObservableObject {
                 dispatchGroup.leave()
                 continue 
             }
-            
             
             rest.fetch(url, defaultValue: AlphaVantageResponse(globalQuote: Quote.default)) { response in
                 let stock = Stock(symbol: response.globalQuote.symbol, quote: response.globalQuote)

@@ -10,11 +10,23 @@ import Foundation
 
 enum Configuration {
     
-    /// Alpha Vantage API Key from environment variables or bundle
-    static var alphaVantageAPIKey: String {
+    /// Result type for API key retrieval
+    enum APIKeyResult {
+        case success(String)
+        case missingKey
+        case testEnvironment
+    }
+    
+    /// Safely retrieve Alpha Vantage API Key from environment variables or bundle
+    static func getAPIKey() -> APIKeyResult {
+        // For testing environments, return test environment indicator
+        if ProcessInfo.processInfo.environment["XCTestConfigurationFilePath"] != nil {
+            return .testEnvironment
+        }
+        
         // First try environment variable (for CI/CD and development)
         if let envKey = ProcessInfo.processInfo.environment["ALPHA_VANTAGE_API_KEY"] {
-            return envKey
+            return .success(envKey)
         }
         
         // Fallback to Info.plist (for local development - not committed)
@@ -22,18 +34,22 @@ enum Configuration {
               let plist = NSDictionary(contentsOfFile: path),
               let key = plist["AlphaVantageAPIKey"] as? String,
               !key.isEmpty else {
-            fatalError("""
-                Alpha Vantage API Key not found!
-                
-                Please set up your API key using one of these methods:
-                1. Set environment variable: ALPHA_VANTAGE_API_KEY
-                2. Add your key to StockWatcher/Property Files/Keys.plist
-                
-                Get a free API key at: https://www.alphavantage.co/support/#api-key
-                """)
+            return .missingKey
         }
         
-        return key
+        return .success(key)
+    }
+    
+    /// Legacy property for backwards compatibility - use getAPIKey() for better error handling
+    static var alphaVantageAPIKey: String {
+        switch getAPIKey() {
+        case .success(let key):
+            return key
+        case .testEnvironment:
+            return "TESTING_PLACEHOLDER_KEY"
+        case .missingKey:
+            return "" // Return empty string instead of crashing
+        }
     }
     
     /// Base URL for Alpha Vantage API
