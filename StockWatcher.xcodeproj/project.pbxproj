@@ -118,13 +118,13 @@
 			path = About;
 			sourceTree = "<group>";
 		};
-		001E05142516BD8200CEF2F9 /* Exrensions */ = {
+		001E05142516BD8200CEF2F9 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
 				001E05152516BD9D00CEF2F9 /* CodableExtension.swift */,
 				001E051A25179F9100CEF2F9 /* DecodedArray.swift */,
 			);
-			path = Exrensions;
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		00269C8324D857910082E211 /* Screens */ = {
@@ -209,7 +209,7 @@
 		637315DD24C54C8F00D88F29 /* StockWatcher */ = {
 			isa = PBXGroup;
 			children = (
-				001E05142516BD8200CEF2F9 /* Exrensions */,
+				001E05142516BD8200CEF2F9 /* Extensions */,
 				00269C8324D857910082E211 /* Screens */,
 				005C87EA24D46D2900A827C3 /* Property Files */,
 				005A928724D1352C00EAD474 /* Managers */,

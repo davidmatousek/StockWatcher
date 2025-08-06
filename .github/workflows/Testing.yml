@@ -7,6 +7,9 @@ jobs:
   test:
     name: Testing Swift Package and iOS app
     runs-on: macOS-latest
+    env:
+      # Set a placeholder API key for testing to prevent crashes
+      ALPHA_VANTAGE_API_KEY: "TEST_API_KEY_FOR_CI"
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -16,6 +19,8 @@ jobs:
           xcode-version: latest-stable
       - name: Build and Test iOS app
         run: |
+          # Ensure API key is available for the build/test process
+          export ALPHA_VANTAGE_API_KEY="TEST_API_KEY_FOR_CI"
           xcodebuild -project StockWatcher.xcodeproj \
                      -scheme StockWatcher \
                      -destination 'platform=iOS Simulator,name=iPhone 16,OS=latest' \
